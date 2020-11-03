@@ -1,5 +1,5 @@
 /*!
- * perfect-scrollbar v1.5.0
+ * perfect-scrollbar v1.5.0-1
  * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
  * Licensed under MIT
  */
@@ -117,7 +117,7 @@
       this.handlers[eventName] = [];
     }
     this.handlers[eventName].push(handler);
-    this.element.addEventListener(eventName, handler, false);
+    this.element.addEventListener(eventName, handler, { passive: true });
   };
 
   EventElement.prototype.unbind = function unbind (eventName, target) {
@@ -329,8 +329,9 @@
     var roundedScrollTop = Math.floor(element.scrollTop);
     var rect = element.getBoundingClientRect();
 
-    i.containerWidth = Math.ceil(rect.width);
-    i.containerHeight = Math.ceil(rect.height);
+    i.containerWidth = Math.round(rect.width);
+    i.containerHeight = Math.round(rect.height);
+
     i.contentWidth = element.scrollWidth;
     i.contentHeight = element.scrollHeight;
 
